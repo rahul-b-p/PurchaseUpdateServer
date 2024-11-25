@@ -1,17 +1,20 @@
 import { Router } from "express";
-import { editOwnerController, getItemController, getUsersController, ownerLoginController } from "../controllers/index.js";
+import { addItemController, editOwnerController, getItemController, getUsersController, ownerLoginController } from "../controllers/index.js";
 import { jwtVerfyOwner } from "../middlewares/index.js";
 
 export const router = Router();
 
 // owner login
-router.post('/login',ownerLoginController);
+router.post('/login', ownerLoginController);
 
 // edit username or password
-router.put('/edit',jwtVerfyOwner,editOwnerController);
+router.put('/edit', jwtVerfyOwner, editOwnerController);
 
 // view users
-router.get('/get-user',jwtVerfyOwner,getUsersController);
+router.get('/get-user', jwtVerfyOwner, getUsersController);
 
 // view items
-router.get('/get-item',jwtVerfyOwner,getItemController);
+router.get('/get-item', jwtVerfyOwner, getItemController);
+
+// add new items
+router.post('/add-item', jwtVerfyOwner, addItemController)
