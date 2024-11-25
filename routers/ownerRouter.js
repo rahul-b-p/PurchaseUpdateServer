@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getUsersController, ownerLoginController } from "../controllers/index.js";
+import { editOwnerController, getItemController, getUsersController, ownerLoginController } from "../controllers/index.js";
 import { jwtVerfyOwner } from "../middlewares/index.js";
 
 export const router = Router();
@@ -8,7 +8,10 @@ export const router = Router();
 router.post('/login',ownerLoginController);
 
 // edit username or password
-router.post('/edit',jwtVerfyOwner,)
+router.put('/edit',jwtVerfyOwner,editOwnerController);
 
 // view users
 router.get('/get-user',jwtVerfyOwner,getUsersController);
+
+// view items
+router.get('/get-item',jwtVerfyOwner,getItemController);
