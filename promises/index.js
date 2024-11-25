@@ -1,3 +1,3 @@
-export * from './items.js';
-export * from './owners.js';
-export * from './users.js';
+export * from './itemsPromise.js';
+export * from './ownersPromise.js';
+export * from './usersPromise.js';
