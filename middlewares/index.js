@@ -1,2 +1,2 @@
-export * from './jwtOwnerMiddleware.js';
-export * from './jwtUserMiddleware.js';
+export * from './ownerAuthMiddleware.js';
+export * from './userAuthMiddleware.js';
