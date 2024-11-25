@@ -14,6 +14,7 @@ export const getItemController = async (req, res) => {
     }
 }
 
+
 export const addItemController = async (req, res) => {
     try {
         const newItem = req.body;
@@ -27,4 +28,14 @@ export const addItemController = async (req, res) => {
         loggers.error(error);
         res.status(400).json('something went wrong');
     }
+}
+
+
+export const edtItemController = async (req, res) => {
+
+}
+
+
+export const deleteItemController = async(req, res) => {
+
 }

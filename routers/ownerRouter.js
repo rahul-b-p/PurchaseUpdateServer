@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addItemController, editOwnerController, getItemController, getUsersController, ownerLoginController } from "../controllers/index.js";
+import { addItemController, deleteItemController, editOwnerController, edtItemController, getItemController, getUsersController, ownerLoginController } from "../controllers/index.js";
 import { jwtVerfyOwner } from "../middlewares/index.js";
 
 export const router = Router();
@@ -17,4 +17,10 @@ router.get('/get-user', jwtVerfyOwner, getUsersController);
 router.get('/get-item', jwtVerfyOwner, getItemController);
 
 // add new items
-router.post('/add-item', jwtVerfyOwner, addItemController)
+router.post('/add-item', jwtVerfyOwner, addItemController);
+
+// update items
+router.put('/edit-item',jwtVerfyOwner,edtItemController);
+
+// delete items
+router.delete('/delete-item',jwtVerfyOwner,deleteItemController)
