@@ -74,3 +74,26 @@ export const loginUserController = async (req, res) => {
         loggers.error(error);
     }
 }
+
+export const editUserController = async (req, res) => {
+    try {
+        const { email, password, newUname, newPass, newMail } = req.body;
+        const users = await getUsers;
+        const index = users.findIndex(item => item.email == email && item.password == password)
+        if (index !== -1) {
+            users[index].username = newUname;
+            users[index].password = newPass;
+            users[index].email = newMail;
+            loggers.info(users[index]);
+            await setUsers(users);
+            res.status(200).json({messege:'Edited Successfully',editedUserData:users[index]});
+        }
+        else {
+            res.statusMessage = "existing credntials not match"
+            res.status(404).json("Existing credntials not match wih the serverside")
+        }
+    } catch (error) {
+        loggers.error(error)
+        res.status(400).json('Something went wrong')
+    }
+}

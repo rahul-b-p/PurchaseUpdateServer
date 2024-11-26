@@ -1,8 +1,15 @@
 import { Router } from "express";
-import { loginUserController, signupUserController } from "../controllers/index.js";
+import { editUserController, loginUserController, signupUserController } from "../controllers/index.js";
+import { jwtVerfyUser } from "../middlewares/index.js";
 
 export const router = Router();
 
-router.post('/signup',signupUserController);
+// signup
+router.post('/signup', signupUserController);
 
-router.post('/login',loginUserController);
+// login
+router.post('/login', loginUserController);
+
+// edit user
+router.put('/edit', jwtVerfyUser, editUserController);
+
