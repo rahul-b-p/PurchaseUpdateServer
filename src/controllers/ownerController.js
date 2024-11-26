@@ -5,9 +5,9 @@ import { loggers } from "../utils/winston/index.js";
 export const ownerLoginController = async (req, res) => {
     try {
         const { username, password } = req.body;
-        const owners = await getOwners;
-        if (owners.find((item) => item.username == username)) {
-            if (owners.find(item => item.password == password)) {
+        const owner = await getOwners;
+        if (owner.username==username) {
+            if (owner.password == password) {
                 const authToken = getOwnerAuthToken(username);
                 res.statusMessage = "Login Successful";
                 res.status(200).json({ authToken });
@@ -31,14 +31,12 @@ export const ownerLoginController = async (req, res) => {
 export const editOwnerController = async (req, res) => {
     try {
         const { username, password, newUname, newPass } = req.body;
-        const owners = await getOwners;
-        const index = owners.findIndex(item => item.username == username && item.password == password)
-        if (index !== -1) {
-            owners[index].username = newUname;
-            owners[index].password = newPass;
-            loggers.info(owners[index]);
-            await setOwners(owners);
-            res.status(200).json('Edited Successfully');
+        const owner = await getOwners;
+        if (owner.username == username && owner.password == password) {
+            owner.username = newUname;
+            owner.password = newPass;
+            await setOwners(owner);
+            res.status(200).json({Messege:'Edited Successfully',body:{owner}});
         }
         else {
             res.statusMessage = "existing credntials not match"
@@ -46,6 +44,6 @@ export const editOwnerController = async (req, res) => {
         }
     } catch (error) {
         loggers.error(error)
-        res.status(400).json('Something went wrong')
+        res.status(400).json({messege:'Something went wrong',error})
     }
 }
