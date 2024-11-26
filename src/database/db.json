@@ -19,6 +19,11 @@
             "username": "user2",
             "email": "user2@gmail.com",
             "password": "user@234"
+        },
+        {
+            "username": "user3",
+            "email": "user3@gmail.com",
+            "password": "user@345"
         }
     ],
     "items": [

@@ -33,14 +33,14 @@ export const editOwnerController = async (req, res) => {
         const { username, password, newUname, newPass } = req.body;
         const owners = await getOwners;
         const index = owners.findIndex(item => item.username == username && item.password == password)
-        if(index !==-1){
-            owners[index].username=newUname;
-            owners[index].password =newPass;
+        if (index !== -1) {
+            owners[index].username = newUname;
+            owners[index].password = newPass;
             loggers.info(owners[index]);
             await setOwners(owners);
             res.status(200).json('Edited Successfully');
         }
-        else{
+        else {
             res.statusMessage = "existing credntials not match"
             res.status(404).json("Existing credntials not match wih the serverside")
         }

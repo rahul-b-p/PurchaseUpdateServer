@@ -36,12 +36,12 @@ export const edtItemController = async (req, res) => {
         const { index } = req.params;
         const editedItem = req.body;
         const items = await getItems;
-        if(index<0 || index>=items.length){
+        if (index < 0 || index >= items.length) {
             loggers.info(index);
             res.statusMessage = "Item not found";
             res.status(404).json('Not found item with given index');
         }
-        else{
+        else {
             items[index] = editedItem;
             await setItems(items);
             res.statusMessage = "Item Edited successfully"
@@ -71,5 +71,5 @@ export const deleteItemController = async (req, res) => {
         loggers.error(error);
         res.status(400).json('Something went wrong')
     }
-    
+
 }

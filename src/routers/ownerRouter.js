@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addItemController, deleteItemController, editOwnerController, edtItemController, getItemController, getUsersController, ownerLoginController } from "../controllers/index.js";
+import { addItemController, deleteItemController, editOwnerController, edtItemController, getItemController, getUsersController, ownerLoginController, removeUserController } from "../controllers/index.js";
 import { jwtVerfyOwner } from "../middlewares/index.js";
 
 export const router = Router();
@@ -13,6 +13,9 @@ router.put('/edit', jwtVerfyOwner, editOwnerController);
 // view users
 router.get('/get-user', jwtVerfyOwner, getUsersController);
 
+// remove users
+router.delete('/delete-user/:index', jwtVerfyOwner, removeUserController);
+
 // view items
 router.get('/get-item', jwtVerfyOwner, getItemController);
 
@@ -23,4 +26,4 @@ router.post('/add-item', jwtVerfyOwner, addItemController);
 router.put('/edit-item/:index', jwtVerfyOwner, edtItemController);
 
 // delete items
-router.delete('/delete-item/:index', jwtVerfyOwner, deleteItemController)
+router.delete('/delete-item/:index', jwtVerfyOwner, deleteItemController);
