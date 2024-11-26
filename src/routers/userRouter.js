@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { editUserController, loginUserController, signupUserController } from "../controllers/index.js";
+import { editUserController, loginUserController, purchaseController, signupUserController } from "../controllers/index.js";
 import { jwtVerfyUser } from "../middlewares/index.js";
 
 export const router = Router();
@@ -12,4 +12,7 @@ router.post('/login', loginUserController);
 
 // edit user
 router.put('/edit', jwtVerfyUser, editUserController);
+
+// item purchase
+router.put('/purchase-item',jwtVerfyUser,purchaseController)
 

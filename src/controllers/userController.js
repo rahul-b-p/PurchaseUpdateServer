@@ -1,4 +1,5 @@
 import { getUserAuthToken } from '../config/jwt/index.js';
+import {billing, purchase} from '../events/index.js';
 import { getUsers, setUsers } from '../utils/promises/index.js';
 import { loggers } from '../utils/winston/index.js';
 
@@ -86,7 +87,7 @@ export const editUserController = async (req, res) => {
             users[index].email = newMail;
             loggers.info(users[index]);
             await setUsers(users);
-            res.status(200).json({messege:'Edited Successfully',editedUserData:users[index]});
+            res.status(200).json({ messege: 'Edited Successfully', editedUserData: users[index] });
         }
         else {
             res.statusMessage = "existing credntials not match"
@@ -95,5 +96,21 @@ export const editUserController = async (req, res) => {
     } catch (error) {
         loggers.error(error)
         res.status(400).json('Something went wrong')
+    }
+}
+
+export const purchaseController = async (req, res) => {
+    try {
+        const {item,quanity} = req.body;
+        const username = req.payload
+        // loggers.info(username);
+        purchase.emit("purchase",item,quanity );
+        billing.emit("billing", item,quanity,(result,err)=>{
+            res.statusMessage="Billed Successfully";
+            res.status(200).json({bill:result});
+        });
+    } catch (error) {
+        loggers.error(error)
+        res.status(400).json({messege:'Something went wrong',error});
     }
 }
