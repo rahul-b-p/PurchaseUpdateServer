@@ -36,16 +36,16 @@ export const edtItemController = async (req, res) => {
         const { index } = req.params;
         const editedItem = req.body;
         const items = await getItems;
-        if(index>=0 && index<items.length){
-            items[index] = editedItem;
-            await setItems(items);
-            res.statusMessage="Item Edited successfully"
-            res.status(200).json({editedItem:items[index]})
+        if(index<0 || index>=items.length){
+            loggers.info(index);
+            res.statusMessage = "Item not found";
+            res.status(404).json('Not found item with given index');
         }
         else{
-            loggers(index);
-            res.statusMessage ="Item not found";
-            res.status(404).json('Not found item with given index');
+            items[index] = editedItem;
+            await setItems(items);
+            res.statusMessage = "Item Edited successfully"
+            res.status(200).json({ editedItem: items[index] })
         }
     } catch (error) {
         loggers.error(error);
@@ -55,5 +55,21 @@ export const edtItemController = async (req, res) => {
 
 
 export const deleteItemController = async (req, res) => {
-
+    try {
+        const { index } = req.params;
+        const items = await getItems;
+        if (index < 0 || index >= items.length) {
+            loggers.info(index);
+            res.statusMessage = "Item not found";
+            res.status(404).json('Not found item with given index');
+        } else {
+            items.splice(index, 1);
+            await setItems(items);
+            res.status(200).json("Item Removed successfully");
+        }
+    } catch (error) {
+        loggers.error(error);
+        res.status(400).json('Something went wrong')
+    }
+    
 }

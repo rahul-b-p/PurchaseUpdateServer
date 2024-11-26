@@ -23,4 +23,4 @@ router.post('/add-item', jwtVerfyOwner, addItemController);
 router.put('/edit-item/:index', jwtVerfyOwner, edtItemController);
 
 // delete items
-router.delete('/delete-item', jwtVerfyOwner, deleteItemController)
+router.delete('/delete-item/:index', jwtVerfyOwner, deleteItemController)
