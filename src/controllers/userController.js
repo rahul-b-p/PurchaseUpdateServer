@@ -1,5 +1,5 @@
-import { getUsers } from '../promises/index.js';
-import { loggers } from '../winston/winstonLoggers.js';
+import { getUsers } from '../utils/promises/index.js';
+import { loggers } from '../utils/winston/index.js';
 
 
 

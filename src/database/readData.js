@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { loggers } from '../winston/index.js';
+import { loggers } from '../utils/winston/index.js';
 
 
 export const readData = () => {

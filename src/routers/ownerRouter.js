@@ -20,7 +20,7 @@ router.get('/get-item', jwtVerfyOwner, getItemController);
 router.post('/add-item', jwtVerfyOwner, addItemController);
 
 // update items
-router.put('/edit-item',jwtVerfyOwner,edtItemController);
+router.put('/edit-item', jwtVerfyOwner, edtItemController);
 
 // delete items
-router.delete('/delete-item',jwtVerfyOwner,deleteItemController)
+router.delete('/delete-item', jwtVerfyOwner, deleteItemController)

@@ -1,4 +1,4 @@
-import { readData, writeData } from "../database/index.js";
+import { readData, writeData } from "../../database/index.js";
 
 export const getUsers = new Promise((resolve, reject) => {
     try {

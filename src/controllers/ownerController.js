@@ -1,6 +1,6 @@
-import { getOwnerAuthToken } from "../jwt/ownerAuth.js";
-import { getOwners, setOwners } from "../promises/index.js";
-import { loggers } from "../winston/index.js";
+import { getOwnerAuthToken } from "../config/jwt/index.js";
+import { getOwners, setOwners } from "../utils/promises/index.js";
+import { loggers } from "../utils/winston/index.js";
 
 export const ownerLoginController = async (req, res) => {
     try {

@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { loggers } from '../winston/index.js';
+import { loggers } from '../utils/winston/index.js';
 
 export const jwtVerfyUser = (req, res, next) => {
     try {

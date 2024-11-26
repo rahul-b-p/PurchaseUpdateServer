@@ -1,5 +1,5 @@
-import { getItems, setItems } from "../promises/index.js"
-import { loggers } from "../winston/index.js";
+import { getItems, setItems } from "../utils/promises/index.js";
+import { loggers } from "../utils/winston/index.js";
 
 
 
@@ -36,6 +36,6 @@ export const edtItemController = async (req, res) => {
 }
 
 
-export const deleteItemController = async(req, res) => {
+export const deleteItemController = async (req, res) => {
 
 }

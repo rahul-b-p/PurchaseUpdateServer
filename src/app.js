@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import { loggers } from './winston/index.js';
+import { loggers } from './utils/winston/index.js'
 import { ownerRouter, userRouter } from './routers/index.js';
 
 dotenv.config();
