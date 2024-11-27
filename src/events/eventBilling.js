@@ -9,17 +9,16 @@ billing.on("billing", async (itemName, quantity, callback) => {
     try {
         const items = await getItems;
         const price = items.find(item => item.name == itemName).price;
-        const totalPrice = price * quantity;
-        const SGST = totalPrice * 9 / 100;
-        const CGST = totalPrice * 9 / 100;
-        const totalGST = SGST + CGST;
-        const amountPayable = totalPrice + totalGST;
-        const timestamp = Date.now();
+        
         const bill = {
             price,
             quantity, 
-            totalPrice, 
-            SGST, CGST, totalGST, amountPayable, timestamp
+            totalPrice:price*quantity, 
+            SGST:(price*quantity)*9/100, 
+            CGST: (price*quantity) * 9 / 100, 
+            totalGST:(price*quantity)*18/100,
+            amountPayable:price*quantity+(price*quantity)*18/100, 
+            timestamp:Date.now()
         };
         callback(bill);
     } catch (error) {
