@@ -94,7 +94,6 @@ export const editUserController = async (req, res) => {
         }
     } catch (error) {
         loggers.error(error);
-        res.status(500).json({messege:'Something went wrong',error});
+        res.status(500).json({ messege: 'Something went wrong', error });
     }
 }
-

@@ -47,3 +47,4 @@ export const editOwnerController = async (req, res) => {
         res.status(500).json({ messege: 'Something went wrong', error });
     }
 }
+
