@@ -1,5 +1,5 @@
 import { getUserAuthToken } from '../config/jwt/index.js';
-import {billing, purchase} from '../events/index.js';
+import {billing, purchase, record} from '../events/index.js';
 import { getUsers, setUsers } from '../utils/promises/index.js';
 import { loggers } from '../utils/winston/index.js';
 
@@ -105,6 +105,7 @@ export const purchaseController = async (req, res) => {
         const username = req.payload
         // loggers.info(username);
         purchase.emit("purchase",item,quanity );
+        record.emit("sale recording",username,item,quanity);
         billing.emit("billing", item,quanity,(result,err)=>{
             res.statusMessage="Billed Successfully";
             res.status(200).json({bill:result});
