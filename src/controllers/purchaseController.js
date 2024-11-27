@@ -18,25 +18,16 @@ export const purchaseController = async (req, res) => {
             else {
                 const bill = result;
 
-                setTimeout(()=>{
-                    record.emit("purchase recording", username, bill, (err, result) => {
-                        if (err) {
-                            loggers.error(err);
-                            res.status(500).json(err.message);
-                        }
-                    });
-                },1000);
-
-                setTimeout(()=>{
+                setTimeout(() => {
                     record.emit("sale recording", username, bill, (err, result) => {
                         if (err) {
                             loggers.error(err);
                             res.status(500).json(err.message);
                         }
                     });
-                },1000);
+                }, 1000);
 
-                setTimeout(()=>{
+                setTimeout(() => {
                     purchase.emit("purchase", item, quanity, (result, err) => {
                         if (err) {
                             if (result == 400) {
@@ -46,7 +37,8 @@ export const purchaseController = async (req, res) => {
                             }
                         }
                     });
-                },1000);
+                }, 2000);
+
 
                 res.statusMessage = "Billed Successfully";
                 res.status(200).json({ bill: result });
