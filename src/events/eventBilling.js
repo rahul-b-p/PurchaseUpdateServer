@@ -7,7 +7,7 @@ const billing = new EventEmitter();
 
 billing.on("billing", async (itemName, quantity, callback) => {
     try {
-        const items = await getItems;
+        const items = await getItems();
         const price = items.find(item => item.name == itemName).price;
         
         const bill = {

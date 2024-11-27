@@ -5,7 +5,7 @@ import { loggers } from "../utils/winston/index.js";
 export const ownerLoginController = async (req, res) => {
     try {
         const { username, password } = req.body;
-        const owner = await getOwners;
+        const owner = await getOwners();
         if (owner.username==username) {
             if (owner.password == password) {
                 const authToken = getOwnerAuthToken(username);
@@ -31,7 +31,7 @@ export const ownerLoginController = async (req, res) => {
 export const editOwnerController = async (req, res) => {
     try {
         const { username, password, newUname, newPass } = req.body;
-        const owner = await getOwners;
+        const owner = await getOwners();
         if (owner.username == username && owner.password == password) {
             owner.username = newUname;
             owner.password = newPass;

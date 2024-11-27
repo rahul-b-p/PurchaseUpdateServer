@@ -15,13 +15,13 @@ record.on("purchase recording", async (username, itemName, quantity, callback) =
     try {
         billing.emit("billing", itemName, quantity, async(bill, err) => {
             if(err) callback(err);
-            const users = await getUsers;
+            const users = await getUsers();
             const index = users.findIndex(item => item.username == username);
             if (index == -1) {
                 callback( new Error('User Not Found'));
             }
             else {
-                if (Array.isArray(users[index].purchase)) {
+                if (!Array.isArray(users[index].purchase)) {
                     users[index].purchase = [];
                 }
                 users[index].purchase.push(bill);
@@ -42,7 +42,7 @@ record.on("sale recording", async (username, itemName, quantity, callback) => {
     try {
         billing.emit("billing", itemName, quantity,async(bill,err)=>{
             if (err) callback(err);
-            const owner = await getOwners;
+            const owner = await getOwners();
             bill.client = username;
             owner.sales.push(bill);
             await setOwners(owner);

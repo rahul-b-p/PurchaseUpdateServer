@@ -6,7 +6,7 @@ import { loggers } from '../utils/winston/index.js';
 
 export const getUsersController = async (req, res) => {
     try {
-        const users = await getUsers;
+        const users = await getUsers();
         loggers.info(users)
         res.status(200).json({ users })
     } catch (error) {
@@ -18,7 +18,7 @@ export const getUsersController = async (req, res) => {
 export const removeUserController = async (req, res) => {
     try {
         const { index } = req.params;
-        const users = await getUsers;
+        const users = await getUsers();
         if (index < 0 || index >= users.length) {
             loggers.info(index)
             res.statusMessage = "User not found";
@@ -37,7 +37,7 @@ export const removeUserController = async (req, res) => {
 export const signupUserController = async (req, res) => {
     try {
         const newUser = req.body;
-        const users = await getUsers;
+        const users = await getUsers();
         users.push(newUser);
         await setUsers(users);
         res.status(200).json("User registered successfully")
@@ -52,7 +52,7 @@ export const signupUserController = async (req, res) => {
 export const loginUserController = async (req, res) => {
     try {
         const { email, password } = req.body;
-        const users = await getUsers;
+        const users = await getUsers();
         if (users.find((item) => item.email == email)) {
             if (users.find(item => item.password == password)) {
                 const { username } = users.find(item => item.email == email && item.password == password);
@@ -78,7 +78,7 @@ export const loginUserController = async (req, res) => {
 export const editUserController = async (req, res) => {
     try {
         const { email, password, newUname, newPass, newMail } = req.body;
-        const users = await getUsers;
+        const users = await getUsers();
         const index = users.findIndex(item => item.email == email && item.password == password)
         if (index !== -1) {
             users[index].username = newUname;

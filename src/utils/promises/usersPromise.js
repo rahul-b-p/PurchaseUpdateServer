@@ -1,14 +1,16 @@
 import { readData, writeData } from "../../database/index.js";
 
-export const getUsers = new Promise((resolve, reject) => {
-    try {
-        const data = readData();
-        const { users } = data;
-        resolve(users);
-    } catch (error) {
-        reject(error);
-    }
-});
+export const getUsers = ()=>{
+    return new Promise((resolve, reject) => {
+        try {
+            const data = readData();
+            const { users } = data;
+            resolve(users);
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
 
 export const setUsers =(users)=>{
     return new Promise((resolve,reject)=>{

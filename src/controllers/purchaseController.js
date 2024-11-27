@@ -11,14 +11,14 @@ export const purchaseController = async (req, res) => {
                 loggers.error(err);
                 res.status(500).json(err);
             }
-        })
+        });
 
-        record.emit("sale recording", username, item, quanity, (result, err) => {
+        /* record.emit("sale recording", username, item, quanity, (result, err) => {
             if (err) {
                 loggers.error(err);
                 res.status(500).json(err);
             }
-        });
+        }); */
 
         billing.emit("billing", item, quanity, (result, err) => {
             if (err) {

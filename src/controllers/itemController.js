@@ -6,7 +6,7 @@ import { loggers } from "../utils/winston/index.js";
 
 export const getItemController = async (req, res) => {
     try {
-        const items = await getItems;
+        const items = await getItems();
         res.status(200).json({ items })
     } catch (error) {
         loggers.error(error);
@@ -18,7 +18,7 @@ export const getItemController = async (req, res) => {
 export const addItemController = async (req, res) => {
     try {
         const newItem = req.body;
-        const items = await getItems;
+        const items = await getItems();
         items.push(newItem);
         loggers.info(items)
         await setItems(items);
@@ -35,7 +35,7 @@ export const edtItemController = async (req, res) => {
     try {
         const { index } = req.params;
         const editedItem = req.body;
-        const items = await getItems;
+        const items = await getItems();
         if (index < 0 || index >= items.length) {
             loggers.info(index);
             res.statusMessage = "Item not found";
@@ -57,7 +57,7 @@ export const edtItemController = async (req, res) => {
 export const deleteItemController = async (req, res) => {
     try {
         const { index } = req.params;
-        const items = await getItems;
+        const items = await getItems();
         if (index < 0 || index >= items.length) {
             loggers.info(index);
             res.statusMessage = "Item not found";

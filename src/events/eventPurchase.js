@@ -9,7 +9,7 @@ const purchase = new EventEmitter();
 
 purchase.on("purchase", async (itemName, quantity,callback) => {
     try {
-        const items = await getItems;
+        const items = await getItems();
         const index = items.findIndex(item => item.name == itemName);
         if (index !== -1) {
             items[index].quantity -= quantity;
