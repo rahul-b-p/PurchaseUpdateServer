@@ -104,13 +104,6 @@ export const purchaseController = async (req, res) => {
         const { item, quanity } = req.body;
         const username = req.payload
 
-        purchase.emit("purchase", item, quanity, (result, err) => {
-            if (err) {
-                loggers.error(err);
-                res.status(500).json(err);
-            }
-        });
-
         record.emit("purchase recording",username,item,quanity,(result,err)=>{
             if(err){
                 loggers.error(err);
@@ -127,13 +120,22 @@ export const purchaseController = async (req, res) => {
 
         billing.emit("billing", item, quanity, (result, err) => {
             if (err) {
+                loggers.info(err);
                 res.status(500).json(err);
             }
             else {
+                purchase.emit("purchase", item, quanity, (result, err) => {
+                    if (err) {
+                        loggers.error(err);
+                        res.status(500).json(err);
+                    }
+                });
                 res.statusMessage = "Billed Successfully";
                 res.status(200).json({ bill: result });
             }
         });
+        
+        
     } catch (error) {
         loggers.error(error)
         res.status(400).json({ messege: 'Something went wrong', error });
