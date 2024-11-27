@@ -6,9 +6,14 @@ import { loggers } from '../utils/winston/index.js';
 
 export const writeData = (data) => {
     try {
+        if (!data || typeof data !== 'object') {
+            throw new Error('Invalid data provided for writing');
+        }
         const dbPath = path.join(path.dirname(fileURLToPath(import.meta.url)), 'db.json');
-        fs.writeFileSync(dbPath, JSON.stringify(data));
-        loggers.info('Data Written Successfully');
+        const jsonData = JSON.stringify(data, null, 2);
+        loggers.info(jsonData); 
+        fs.writeFileSync(dbPath, jsonData, 'utf-8');
+        loggers.info('Data written successfully');
     } catch (error) {
         loggers.error(error);
     }

@@ -18,7 +18,6 @@ export const setOwners = (owner) => {
         try {
             const data = readData();
             data.owner = owner;
-            console.log(data);
             writeData(data);
             resolve('Owners Key Updated on db.json');
         } catch (error) {

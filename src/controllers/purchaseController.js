@@ -6,19 +6,6 @@ export const purchaseController = async (req, res) => {
         const { item, quanity } = req.body;
         const username = req.payload
 
-        /* record.emit("purchase recording", username, item, quanity, (err,result) => {
-            if (err) {
-                loggers.error(err);
-                res.status(500).json(err.message);
-            }
-        }); */
-
-        /* record.emit("sale recording", username, item, quanity, (err,result) => {
-            if (err) {
-                loggers.error(err);
-                res.status(500).json(err.message);
-            }
-        }); */
         billing.emit("billing", item, quanity, (err, result) => {
             if (err) {
                 if (result == 400) {
@@ -29,6 +16,22 @@ export const purchaseController = async (req, res) => {
                 }
             }
             else {
+                const bill = result;
+
+                record.emit("purchase recording", username, bill, (err, result) => {
+                    if (err) {
+                        loggers.error(err);
+                        res.status(500).json(err.message);
+                    }
+                });
+
+                record.emit("sale recording", username, bill, (err, result) => {
+                    if (err) {
+                        loggers.error(err);
+                        res.status(500).json(err.message);
+                    }
+                });
+
                 purchase.emit("purchase", item, quanity, (result, err) => {
                     if (err) {
                         if (result == 400) {
@@ -38,6 +41,7 @@ export const purchaseController = async (req, res) => {
                         }
                     }
                 });
+                
                 res.statusMessage = "Billed Successfully";
                 res.status(200).json({ bill: result });
             }
