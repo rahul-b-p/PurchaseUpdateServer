@@ -1,51 +1,157 @@
 {
-    "owner": {
-        "username": "Admin",
-        "password": "Admin@123",
-        "sales": []
-    },
-    "users": [
-        {
-            "username": "user1",
-            "email": "user1@gmail.com",
-            "password": "user@123"
-        },
-        {
-            "username": "user2",
-            "email": "user2@gmail.com",
-            "password": "user@234"
-        },
-        {
-            "username": "user3",
-            "email": "user3@gmail.com",
-            "password": "user@345"
-        },
-        {
-            "username": "user4",
-            "email": "user3@gmail.com",
-            "password": "user@345"
-        }
-    ],
-    "items": [
-        {
-            "name": "item1",
-            "quantity": 31,
-            "price": 2500
-        },
-        {
-            "name": "item2",
-            "quantity": 144,
-            "price": 1500
-        },
-        {
-            "name": "item3",
-            "quantity": 79,
-            "price": 1200
-        },
-        {
-            "name": "item4",
-            "quantity": 100,
-            "price": 1250
-        }
+  "owner": {
+    "username": "Admin",
+    "password": "Admin@123",
+    "sales": [
+      {
+        "price": 1500,
+        "quantity": 3,
+        "totalPrice": 4500,
+        "SGST": 405,
+        "CGST": 405,
+        "totalGST": 810,
+        "amountPayable": 5310,
+        "timestamp": 1732704234170,
+        "client": "user4"
+      },
+      {
+        "price": 1250,
+        "quantity": 3,
+        "totalPrice": 3750,
+        "SGST": 337.5,
+        "CGST": 337.5,
+        "totalGST": 675,
+        "amountPayable": 4425,
+        "timestamp": 1732704307499,
+        "client": "user4"
+      },
+      {
+        "price": 1250,
+        "quantity": 3,
+        "totalPrice": 3750,
+        "SGST": 337.5,
+        "CGST": 337.5,
+        "totalGST": 675,
+        "amountPayable": 4425,
+        "timestamp": 1732705961399,
+        "client": "user4"
+      }
     ]
+  },
+  "users": [
+    {
+      "username": "user1",
+      "email": "user1@gmail.com",
+      "password": "user@123"
+    },
+    {
+      "username": "user2",
+      "email": "user2@gmail.com",
+      "password": "user@234"
+    },
+    {
+      "username": "user3",
+      "email": "user3@gmail.com",
+      "password": "user@345"
+    },
+    {
+      "username": "user4",
+      "email": "user3@gmail.com",
+      "password": "user@345",
+      "purchase": [
+        {
+          "price": 1500,
+          "quantity": 3,
+          "totalPrice": 4500,
+          "SGST": 405,
+          "CGST": 405,
+          "totalGST": 810,
+          "amountPayable": 5310,
+          "timestamp": 1732704086784
+        },
+        {
+          "price": 1500,
+          "quantity": 3,
+          "totalPrice": 4500,
+          "SGST": 405,
+          "CGST": 405,
+          "totalGST": 810,
+          "amountPayable": 5310,
+          "timestamp": 1732704160784
+        },
+        {
+          "price": 1500,
+          "quantity": 3,
+          "totalPrice": 4500,
+          "SGST": 405,
+          "CGST": 405,
+          "totalGST": 810,
+          "amountPayable": 5310,
+          "timestamp": 1732704193060
+        },
+        {
+          "price": 1500,
+          "quantity": 3,
+          "totalPrice": 4500,
+          "SGST": 405,
+          "CGST": 405,
+          "totalGST": 810,
+          "amountPayable": 5310,
+          "timestamp": 1732704234170
+        },
+        {
+          "price": 1250,
+          "quantity": 3,
+          "totalPrice": 3750,
+          "SGST": 337.5,
+          "CGST": 337.5,
+          "totalGST": 675,
+          "amountPayable": 4425,
+          "timestamp": 1732704307499
+        },
+        {
+          "price": 1250,
+          "quantity": 3,
+          "totalPrice": 3750,
+          "SGST": 337.5,
+          "CGST": 337.5,
+          "totalGST": 675,
+          "amountPayable": 4425,
+          "timestamp": 1732705961399
+        }
+      ]
+    },
+    {
+      "username": "user5",
+      "email": "user3@gmail.com",
+      "password": "user@345"
+    },
+    {
+      "username": "user5",
+      "email": "user3@gmail.com",
+      "password": "user@345"
+    }
+  ],
+  "items": [
+    {
+      "name": "item1",
+      "quantity": 31,
+      "price": 2500
+    },
+    {
+      "name": "item2",
+      "quantity": 132,
+      "price": 1500
+    },
+    {
+      "name": "item3",
+      "quantity": 79,
+      "price": 1200
+    },
+    {
+      "name": "item4",
+      "quantity": 94,
+      "price": 1250
+    }
+  ]
 }

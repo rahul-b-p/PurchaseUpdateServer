@@ -11,10 +11,11 @@ export const writeData = (data) => {
         }
         const dbPath = path.join(path.dirname(fileURLToPath(import.meta.url)), 'db.json');
         const jsonData = JSON.stringify(data, null, 2);
-        loggers.info(jsonData); 
-        fs.writeFileSync(dbPath, jsonData, 'utf-8');
+        fs.writeFileSync(dbPath, jsonData, 'utf8');
         loggers.info('Data written successfully');
     } catch (error) {
         loggers.error(error);
     }
 }
+
+
