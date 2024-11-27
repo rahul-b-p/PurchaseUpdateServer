@@ -7,7 +7,7 @@ const purchase = new EventEmitter();
 
 
 
-purchase.on("purchase", async (itemName, quantity) => {
+purchase.on("purchase", async (itemName, quantity,callback) => {
     try {
         const items = await getItems;
         const index = items.findIndex(item => item.name == itemName);
@@ -15,12 +15,13 @@ purchase.on("purchase", async (itemName, quantity) => {
             items[index].quantity -= quantity;
             await setItems(items);
             loggers.info('Item Count Updated');
+            callback("Item Count Updated");
         }
         else {
-            throw new Error('not an Existing Item');
+            callback(new Error('not an Existing Item'));
         }
     } catch (error) {
-        throw error, new Error("Purchase not worked");
+        callback(error, new Error("Purchase not worked"));
     }
 });
 

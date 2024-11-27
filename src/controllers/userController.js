@@ -1,5 +1,5 @@
 import { getUserAuthToken } from '../config/jwt/index.js';
-import {billing, purchase, record} from '../events/index.js';
+import { billing, purchase, record } from '../events/index.js';
 import { getUsers, setUsers } from '../utils/promises/index.js';
 import { loggers } from '../utils/winston/index.js';
 
@@ -101,17 +101,41 @@ export const editUserController = async (req, res) => {
 
 export const purchaseController = async (req, res) => {
     try {
-        const {item,quanity} = req.body;
+        const { item, quanity } = req.body;
         const username = req.payload
-        // loggers.info(username);
-        purchase.emit("purchase",item,quanity );
-        record.emit("sale recording",username,item,quanity);
-        billing.emit("billing", item,quanity,(result,err)=>{
-            res.statusMessage="Billed Successfully";
-            res.status(200).json({bill:result});
+
+        purchase.emit("purchase", item, quanity, (result, err) => {
+            if (err) {
+                loggers.error(err);
+                res.status(500).json(err);
+            }
+        });
+
+        record.emit("purchase recording",username,item,quanity,(result,err)=>{
+            if(err){
+                loggers.error(err);
+                res.status(500).json(err);
+            }
+        })
+
+        record.emit("sale recording", username, item, quanity, (result, err) => {
+            if (err) {
+                loggers.error(err);
+                res.status(500).json(err);
+            }
+        });
+
+        billing.emit("billing", item, quanity, (result, err) => {
+            if (err) {
+                res.status(500).json(err);
+            }
+            else {
+                res.statusMessage = "Billed Successfully";
+                res.status(200).json({ bill: result });
+            }
         });
     } catch (error) {
         loggers.error(error)
-        res.status(400).json({messege:'Something went wrong',error});
+        res.status(400).json({ messege: 'Something went wrong', error });
     }
 }
