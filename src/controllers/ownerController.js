@@ -22,8 +22,8 @@ export const ownerLoginController = async (req, res) => {
             res.status(404).json("The enterd username isn't valid, please check!");
         }
     } catch (error) {
-        res.status(400).json('Something went wrong');
         loggers.error(error);
+        res.status(500).json({ messege: 'Something went wrong', error });
     }
 };
 
@@ -43,7 +43,7 @@ export const editOwnerController = async (req, res) => {
             res.status(404).json("Existing credntials not match wih the serverside")
         }
     } catch (error) {
-        loggers.error(error)
-        res.status(400).json({messege:'Something went wrong',error})
+        loggers.error(error);
+        res.status(500).json({ messege: 'Something went wrong', error });
     }
 }

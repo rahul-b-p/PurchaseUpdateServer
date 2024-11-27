@@ -15,10 +15,10 @@ purchase.on("purchase", async (itemName, quantity,callback) => {
             items[index].quantity -= quantity;
             await setItems(items);
             loggers.info('Item Count Updated');
-            callback("Item Count Updated");
+            callback(null,"Item Count Updated");
         }
         else {
-            callback(new Error('not an Existing Item'));
+            callback(new Error('not an Existing Item'),400);
         }
     } catch (error) {
         callback(error, new Error("Purchase not worked"));

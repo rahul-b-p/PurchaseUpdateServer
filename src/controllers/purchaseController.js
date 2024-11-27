@@ -6,30 +6,36 @@ export const purchaseController = async (req, res) => {
         const { item, quanity } = req.body;
         const username = req.payload
 
-        record.emit("purchase recording", username, item, quanity, (result, err) => {
+        /* record.emit("purchase recording", username, item, quanity, (err,result) => {
             if (err) {
                 loggers.error(err);
-                res.status(500).json(err);
-            }
-        });
-
-        /* record.emit("sale recording", username, item, quanity, (result, err) => {
-            if (err) {
-                loggers.error(err);
-                res.status(500).json(err);
+                res.status(500).json(err.message);
             }
         }); */
 
-        billing.emit("billing", item, quanity, (result, err) => {
+        /* record.emit("sale recording", username, item, quanity, (err,result) => {
             if (err) {
-                loggers.info(err);
-                res.status(500).json(err);
+                loggers.error(err);
+                res.status(500).json(err.message);
+            }
+        }); */
+        billing.emit("billing", item, quanity, (err, result) => {
+            if (err) {
+                if (result == 400) {
+                    loggers.error(err);
+                    res.status(404).json({ error: err.message })
+                } else {
+                    res.status(500).json({ error: err.message });
+                }
             }
             else {
                 purchase.emit("purchase", item, quanity, (result, err) => {
                     if (err) {
-                        loggers.error(err);
-                        res.status(500).json(err);
+                        if (result == 400) {
+                            res.status(400).json({ error: err.message })
+                        } else {
+                            res.status(500).json(err.message);
+                        }
                     }
                 });
                 res.statusMessage = "Billed Successfully";
@@ -40,6 +46,6 @@ export const purchaseController = async (req, res) => {
 
     } catch (error) {
         loggers.error(error)
-        res.status(400).json({ messege: 'Something went wrong', error });
+        res.status(500).json({ message: 'Something went wrong', error });
     }
 }

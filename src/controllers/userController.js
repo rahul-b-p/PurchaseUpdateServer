@@ -11,7 +11,7 @@ export const getUsersController = async (req, res) => {
         res.status(200).json({ users })
     } catch (error) {
         loggers.error(error);
-        res.status(400).json("Something went wrong at server side")
+        res.status(500).json({ messege: 'Something went wrong', error });
     }
 }
 
@@ -30,7 +30,7 @@ export const removeUserController = async (req, res) => {
         }
     } catch (error) {
         loggers.error(error);
-        res.status(400).json("Something went wrong");
+        res.status(500).json({ messege: 'Something went wrong', error });
     }
 }
 
@@ -43,7 +43,7 @@ export const signupUserController = async (req, res) => {
         res.status(200).json("User registered successfully")
     } catch (error) {
         loggers.error(error);
-        res.status(400).json({ messege: 'Something went wrong', error })
+        res.status(500).json({ messege: 'Something went wrong', error });
     }
 
 
@@ -70,8 +70,8 @@ export const loginUserController = async (req, res) => {
             res.status(404).json("The enterd username isn't valid, please check!");
         }
     } catch (error) {
-        res.status(400).json('Something went wrong');
         loggers.error(error);
+        res.status(500).json({ messege: 'Something went wrong', error });
     }
 }
 
@@ -93,8 +93,8 @@ export const editUserController = async (req, res) => {
             res.status(404).json("Existing credntials not match wih the serverside")
         }
     } catch (error) {
-        loggers.error(error)
-        res.status(400).json('Something went wrong')
+        loggers.error(error);
+        res.status(500).json({messege:'Something went wrong',error});
     }
 }
 

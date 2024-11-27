@@ -7,10 +7,10 @@ import { loggers } from "../utils/winston/index.js";
 export const getItemController = async (req, res) => {
     try {
         const items = await getItems();
-        res.status(200).json({ items })
+        res.status(200).json({ items });
     } catch (error) {
         loggers.error(error);
-        res.status(200).json("Something went wrong")
+        res.status(500).json({ messege: 'Something went wrong', error });
     }
 }
 
@@ -26,7 +26,7 @@ export const addItemController = async (req, res) => {
         res.status(200).json("Item added Successfully into your list")
     } catch (error) {
         loggers.error(error);
-        res.status(400).json('something went wrong');
+        res.status(500).json({ messege: 'Something went wrong', error });
     }
 }
 
@@ -49,7 +49,7 @@ export const edtItemController = async (req, res) => {
         }
     } catch (error) {
         loggers.error(error);
-        res.status(400).json('Something went wrong')
+        res.status(500).json({ messege: 'Something went wrong', error });
     }
 }
 
@@ -69,7 +69,7 @@ export const deleteItemController = async (req, res) => {
         }
     } catch (error) {
         loggers.error(error);
-        res.status(400).json('Something went wrong')
+        res.status(500).json({ messege: 'Something went wrong', error });
     }
 
 }

@@ -27,13 +27,13 @@ record.on("purchase recording", async (username, itemName, quantity, callback) =
                 users[index].purchase.push(bill);
                 await setUsers(users);
                 loggers.info("Purchase Bill Recorded");
-                callback('Purchase bill recorded on users');
+                callback(null,'Purchase bill recorded on users');
             }
         });
         
     } catch (error) {
         record.emit("error",(err)=>{
-            callback(err,error);
+            callback(err.message,error);
         })
     }
 });
@@ -47,11 +47,11 @@ record.on("sale recording", async (username, itemName, quantity, callback) => {
             owner.sales.push(bill);
             await setOwners(owner);
             loggers.info("Sale record updated");
-            callback("Sale Record Updated");
+            callback(null,"Sale Record Updated");
         });
     } catch (error) {
         record.emit("error",(err)=>{
-            callback(err,error);
+            callback(err.message,error);
         })
     }
 });

@@ -29,12 +29,12 @@
     "items": [
         {
             "name": "item1",
-            "quantity": 40,
+            "quantity": 31,
             "price": 2500
         },
         {
             "name": "item2",
-            "quantity": 150,
+            "quantity": 144,
             "price": 1500
         },
         {
